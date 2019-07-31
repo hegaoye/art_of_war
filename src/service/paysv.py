@@ -67,6 +67,11 @@ class PaySV:
                 # ３.读取订单详情
                 chick_x_y = income["click_x_y"]
                 data = self.alipay.order_detail(chick_x_y[0], chick_x_y[1], is_shop)
+
+                # 数据错误或者进错页面
+                if not data:
+                    return
+
                 self.alipay.back()
 
                 # ４.验证订单是否重复

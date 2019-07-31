@@ -143,7 +143,7 @@ def load_detail_xml(abs_path, attr="text", attr2="content-desc"):
 
 
 if __name__ == '__main__':
-    abs_path = '/home/scrapy_pay_client/detail2.xml'
+    abs_path = '/home/scrapy_pay_client/ui_xml/detail2.xml'
     result_list = load_detail_xml(abs_path)
     # result_list = load_xml(abs_path, attr="content-desc")
 
@@ -157,7 +157,7 @@ if __name__ == '__main__':
     node = Node()
     for x in result_list:
         print(x)
-        # node.to_obj(x)
+        # print(node.to_obj(x).text.find("账单详情"))
         # if node.text.__eq__("支付宝通知"):
         #     print(node.get_bounds()[0])
         #     print(node.get_bounds()[1])

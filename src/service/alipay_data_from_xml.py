@@ -190,6 +190,14 @@ class AlipayXmlData:
         path = self.abs_detail_path.replace("{device_id}", device_id)
         result_list = load_detail_xml(path)
         if result_list.__len__() > 16:
+            count_detail = 0
+            for result in result_list:
+                if str(Node().to_obj(result).text).find("账单详情") >= 0:
+                    count_detail += 1
+
+            if count_detail == 0:
+                return None
+
             if is_shop == 0:
                 data = {
                     "user": Node().to_obj(result_list[4]).text,
