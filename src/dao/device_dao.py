@@ -34,7 +34,7 @@ class DeviceDao:
         删除掉线的设备
         :param date_time: 过期时间
         """
-        sql = 'delete from devices where device_id=="' + str(device_id) + '"'
+        sql = 'delete from devices where device_id="' + str(device_id) + '"'
         self.db.delete(sql)
 
     def delete(self):
