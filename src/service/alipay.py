@@ -145,7 +145,7 @@ class AliPay:
         time.sleep(.5)
         notify_count = self.alipayxmldata.notify_list(device_id)
         if notify_count > 0:
-            # # 清理通知
+            # 清理通知
             if not self.debug:
                 x, y = self.alipayxmldata.get_click_clear_notify_x_y(self.device_id)
                 self.click(x, y)

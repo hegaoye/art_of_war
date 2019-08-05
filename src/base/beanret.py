@@ -15,6 +15,7 @@ class BeanRet:
         else:
             self.info = info
         self.data = data
+        self.authorization = None
 
     def to_json(self):
         '''

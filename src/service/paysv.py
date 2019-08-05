@@ -133,9 +133,10 @@ class PaySV:
                     # ６.缓存结果
                     bill_obj = self.bill_dao.load(order_no)
                     if not bill_obj:
-                        account = self.account_dao.load_by_device_id(self.device_id)
-                        if account:
-                            self.bill_dao.insert(order_no, user, money, state, sign, time_str, account["account"])
+                        account_obj = self.account_dao.load_by_device_id(self.device_id)
+                        self.account_dao.update(account_obj["account"], beanret.authorization)
+                        if account_obj:
+                            self.bill_dao.insert(order_no, user, money, state, sign, time_str, account_obj["account"])
                             logger.debug("新增一单: " + user)
 
             # 翻页计算

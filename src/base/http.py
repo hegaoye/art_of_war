@@ -36,6 +36,10 @@ def post(url, data=None, headers=None):
         response = request.urlopen(req)
         result = response.read().decode(encoding='utf-8')
         beanret = BeanRet().to_obj(result)
+        headers_return = response.headers
+        if headers_return:
+            if headers_return["authorization"]:
+                beanret.authorization = str(headers_return["authorization"]).replace("'", "")
         return beanret
     except Exception as e:
         print(e)
