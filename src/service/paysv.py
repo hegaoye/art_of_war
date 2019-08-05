@@ -226,8 +226,7 @@ class PaySV:
             account_load = self.account_dao.load_by_account(account)
             if account_load:
                 self.account_dao.delete(self.device_id)
-
-            self.account_dao.insert(account, appkey, token, self.device_id, screen_x_y, is_shop)
+            self.account_dao.insert(account, appkey, token, self.device_id, screen_x_y,is_shop)
 
             logger.debug("初始化配置完成")
             return True, account

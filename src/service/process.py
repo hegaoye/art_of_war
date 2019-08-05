@@ -1,4 +1,5 @@
 # coding=utf-8
+import datetime
 import threading
 import time
 
@@ -56,7 +57,17 @@ class Process(threading.Thread):
                 if is_connected:
                     logger.debug("connected to device:" + self.device_id)
                     if not is_login:
-                        is_login, alipay_account = self.configure()
+                        # 获取上次登录的时间进行判断是否过期
+                        device_obj = self.pay_sv.load_device_by_id(self.device_id)
+                        login_time = device_obj["login_time"]
+                        now_time = datetime.datetime.now().strftime('%Y%m%d%000000')
+                        if int(now_time) - int(login_time) >= 1:
+                            # 过期重新登录
+                            is_login, alipay_account = self.configure()
+                        else:
+                            # 未过期直接使用
+                            is_login = True
+                            alipay_account = device_obj["account"]
 
                     if is_login:
                         is_notify = self.pay_sv.detect_alipay_notify()

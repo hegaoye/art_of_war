@@ -1,4 +1,6 @@
 # coding=utf-8
+import datetime
+
 from src.base.databasetools import Sqlite3Tools
 
 
@@ -11,7 +13,8 @@ class AccountDao:
         result = self.db.load(sql)
         if result:
             return {"account": result[0], "appkey": result[1], "token": result[2], "device_id": result[3],
-                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7]}
+                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7],
+                    "login_time": result[8]}
         return None
 
     def load_by_account_appkey(self, alipay_account, appkey):
@@ -19,7 +22,8 @@ class AccountDao:
         result = self.db.load(sql)
         if result:
             return {"account": result[0], "appkey": result[1], "token": result[2], "device_id": result[3],
-                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7]}
+                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7],
+                    "login_time": result[8]}
         return None
 
     def load_by_account(self, account):
@@ -27,7 +31,8 @@ class AccountDao:
         result = self.db.load(sql)
         if result:
             return {"account": result[0], "appkey": result[1], "token": result[2], "device_id": result[3],
-                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7]}
+                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7],
+                    "login_time": result[8]}
         return None
 
     def load_by_device_id(self, device_id):
@@ -35,7 +40,8 @@ class AccountDao:
         result = self.db.load(sql)
         if result:
             return {"account": result[0], "appkey": result[1], "token": result[2], "device_id": result[3],
-                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7]}
+                    "screen_x_y": result[4], "bill_x_y": result[5], "app_x_y": result[6], "is_shop": result[7],
+                    "login_time": result[8]}
         return None
 
     def update(self, account, token):
@@ -70,9 +76,10 @@ class AccountDao:
         :param screen_x_y: 屏幕的x,y坐标
         :param is_shop: 是否是商铺
         """
-        sql = 'insert into user("account","appkey","token","device_id","screen_x_y","is_shop") values ("' + str(
+
+        sql = 'insert into user("account","appkey","token","device_id","screen_x_y","is_shop","login_time") values ("' + str(
             account) + '","' + str(appkey) + '","' + str(token) + '","' + str(device_id) + '","' + str(
-            screen_x_y) + '","' + str(is_shop) + '")'
+            screen_x_y) + '","' + str(is_shop) + '","' + str(datetime.datetime.now().strftime('%Y%m%d%000000')) + '")'
         self.db.insert(sql)
 
     def delete(self, device_id):

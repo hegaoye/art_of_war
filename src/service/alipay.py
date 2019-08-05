@@ -134,9 +134,7 @@ class AliPay:
                 self.click(x, y)
                 time.sleep(.2)
 
-            return True
-        else:
-            return False
+        return is_online
 
     def detect_alilpay_notify(self, device_id):
         """
