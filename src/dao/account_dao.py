@@ -79,7 +79,7 @@ class AccountDao:
 
         sql = 'insert into user("account","appkey","token","device_id","screen_x_y","is_shop","login_time") values ("' + str(
             account) + '","' + str(appkey) + '","' + str(token) + '","' + str(device_id) + '","' + str(
-            screen_x_y) + '","' + str(is_shop) + '","' + str(datetime.datetime.now().strftime('%Y%m%d%000000')) + '")'
+            screen_x_y) + '","' + str(is_shop) + '","' + str(datetime.datetime.now().strftime('%Y%m%d000000')) + '")'
         self.db.insert(sql)
 
     def delete(self, device_id):
